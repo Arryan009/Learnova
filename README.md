@@ -1,7 +1,7 @@
 # Learnova
 
 Overview
-The Learning Management System (LMS) is a Python-based web application built using Streamlit, designed to facilitate the management of courses, students, assignments, and grades. The system supports both teachers and students, providing tailored views and functionalities for each user type.
+The Learnova is a Python-based web application built using Streamlit, designed to facilitate the management of courses, students, assignments, and grades. The system supports both teachers and students, providing tailored views and functionalities for each user type.
 
 Features
 For Teachers:
