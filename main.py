@@ -68,13 +68,13 @@ class Teacher:
     def assign_grades(self, student, course, assignment, grade):
         student.add_grade(course.course_name, assignment.assignment_name, grade)
 
-# Sample teacher and student data
+
 teacher = Teacher("Mrs. Rashmi S")
 student1 = Student(2343116, "Arryan")
 student2 = Student(2343117, "Arth")
 student3 = Student(2343139, "Lakshya")
 
-# Teacher and Course Setup
+
 course = teacher.create_course("DSA using C++")
 course = teacher.create_course("Mobile Applications (MB)")
 course = teacher.create_course("Full Stack Development")
@@ -93,18 +93,18 @@ teacher.assign_grades(student1, course, assignment, 100)
 teacher.assign_grades(student2, course, assignment, 100)
 teacher.assign_grades(student3, course, assignment, 100)
 
-# Initialize session state for login and navigation
+
 if 'login_status' not in st.session_state:
     st.session_state['login_status'] = False
     st.session_state['login_type'] = None
     st.session_state['username'] = None
     st.session_state['navigation'] = 'Home'
 
-# Display the login page if not logged in
+
 if not st.session_state['login_status']:
     st.title("Welcome to Learnova")
     
-    # Login Section
+
     st.subheader("Login")
     user_type = st.selectbox("Login as:", ["Teacher", "Student"])
     username = st.text_input("Username")
@@ -112,47 +112,47 @@ if not st.session_state['login_status']:
     
     if st.button("Login"):
         if user_type == "Teacher":
-            # Simulate teacher login
-            if username == "Mrs. Rashmi S" and password == "teacher123":  # Simple mock check
+            
+            if username == "Mrs. Rashmi S" and password == "teacher123": 
                 st.success("Logged in as Teacher!")
                 st.session_state['login_status'] = True
                 st.session_state['login_type'] = "Teacher"
-                st.session_state['username'] = username  # Store username
-                st.session_state['navigation'] = "Courses"  # Auto-redirect to Courses
+                st.session_state['username'] = username 
+                st.session_state['navigation'] = "Courses" 
             else:
                 st.error("Invalid credentials for Teacher.")
         elif user_type == "Student":
-            # Simulate student login
-            if username in [student1.name, student2.name, student3.name] and password == "student123":  # Mock password check
+           
+            if username in [student1.name, student2.name, student3.name] and password == "student123": 
                 st.success(f"Logged in as {username} (Student)!")
                 st.session_state['login_status'] = True
                 st.session_state['login_type'] = "Student"
-                st.session_state['username'] = username  # Store username
+                st.session_state['username'] = username 
             else:
                 st.error("Invalid credentials for Student.")
 else:
-    # Once logged in, show the navigation
+
     st.sidebar.title("LMS Navigation")
     navigation = st.sidebar.selectbox("Go to", ["Courses", "Assignments", "Students", "Grades"], index=0)
     st.session_state['navigation'] = navigation
 
-    # Display different content based on navigation
+   
     if st.session_state['navigation'] == "Courses":
         if st.session_state['login_type'] == "Teacher":
             st.title("Courses Management (Teacher View)")
             
-            # Show Teacher's Courses
+           
             course_name = st.selectbox("Select a Course", [course.course_name for course in teacher.courses])
 
             selected_course = next(course for course in teacher.courses if course.course_name == course_name)
             
-            # Add Assignments
+            
             new_assignment = st.text_input("Add New Assignment")
             if st.button("Add Assignment"):
                 selected_course.add_assignment(new_assignment)
                 st.success(f"Assignment '{new_assignment}' added to {course_name}")
 
-            # View Students and Assign Grades
+            
             st.subheader("Students Enrolled")
             for student in selected_course.students:
                 st.write(f"Student ID: {student.student_id}, Name: {student.name}")
@@ -164,7 +164,7 @@ else:
         elif st.session_state['login_type'] == "Student":
             st.title("Courses Overview (Student View)")
             
-            # Retrieve student based on the stored username
+        
             username = st.session_state['username']
             student = student1 if username == student1.name else student2 if username == student2.name else student3
             
